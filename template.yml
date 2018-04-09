@@ -12,7 +12,7 @@ Resources:
   GetMatches:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
+      CodeUri: dogonabear/
       Handler: get_matches.handler
       Runtime: python3.6
       Role:
@@ -27,7 +27,7 @@ Resources:
   CreateProfile:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
+      CodeUri: dogonabear/
       Handler: create_profile.handler
       Runtime: python3.6
       Role:
@@ -42,7 +42,7 @@ Resources:
   UpdateProfile:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
+      CodeUri: dogonabear/
       Handler: update_profile.handler
       Runtime: python3.6
       Role:
