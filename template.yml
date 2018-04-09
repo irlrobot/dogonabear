@@ -9,10 +9,11 @@ Parameters:
     Description: CodeStar projectId used to associate new resources to team members
 
 Resources:
-  HelloWorld:
+  GetMatches:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: index.handler
+      CodeUri: src/
+      Handler: get_matches.handler
       Runtime: python3.6
       Role:
         Fn::ImportValue:
@@ -21,10 +22,71 @@ Resources:
         GetEvent:
           Type: Api
           Properties:
-            Path: /
-            Method: get
+            Path: /get_matches
+            Method: get_matches
+  CreateProfile:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: create_profile.handler
+      Runtime: python3.6
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Events:
         PostEvent:
           Type: Api
           Properties:
-            Path: /
+            Path: /create_profile
+            Method: put
+  UpdateProfile:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: update_profile.handler
+      Runtime: python3.6
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Events:
+        PostEvent:
+          Type: Api
+          Properties:
+            Path: /update_profile
             Method: post
+  ProfilesTable: 
+    Type: "AWS::DynamoDB::Table"
+    Properties: 
+      TableName: "DogOnABearProfiles"
+      AttributeDefinitions: 
+        - 
+          AttributeName: "username"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "username"
+          KeyType: "HASH"
+      ProvisionedThroughput: 
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"
+  ProfilesTable: 
+      Type: "AWS::DynamoDB::Table"
+      Properties: 
+        TableName: "DogOnABearMatches"
+        AttributeDefinitions: 
+          - 
+            AttributeName: "username"
+            AttributeType: "S"
+          - 
+            AttributeName: "matched_username"
+            AttributeType: "S"
+        KeySchema: 
+          - 
+            AttributeName: "username"
+            KeyType: "HASH"
+          - 
+            AttributeName: "matched_username"
+            KeyType: "RANGE"
+        ProvisionedThroughput: 
+          ReadCapacityUnits: "5"
+          WriteCapacityUnits: "5"

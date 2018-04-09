@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - pip install -r requirements.txt
+
+  build:
+    commands:
+      - python -m pytest --cov=dogonabear/ --cov-fail-under 100 tests/
+      - aws cloudformation validate-template --template-body file://template.yml

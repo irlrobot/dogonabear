@@ -7,7 +7,7 @@ phases:
 
   pre_build:
     commands:
-      - pytest --cov=src/ --cov-fail-under 100
+      - python -m pytest --cov=dogonabear/ --cov-fail-under 100 tests/
       - aws cloudformation validate-template --template-body file://template.yml
   
   build:
