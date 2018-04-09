@@ -69,7 +69,7 @@ Resources:
       ProvisionedThroughput: 
         ReadCapacityUnits: "5"
         WriteCapacityUnits: "5"
-  ProfilesTable: 
+  MatchesTable: 
       Type: "AWS::DynamoDB::Table"
       Properties: 
         TableName: "DogOnABearMatches"
