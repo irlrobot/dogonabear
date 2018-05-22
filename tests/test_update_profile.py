@@ -5,7 +5,7 @@ def test_update_profile_handler():
   event = {}
   context = {}
   expected = {
-    'body': '{"output": "Profile Updated"}',
+    'body': '{"output": "Profile Updated!"}',
     'headers': {
       'Content-Type': 'application/json'
     },

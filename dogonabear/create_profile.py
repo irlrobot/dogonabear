@@ -4,7 +4,7 @@ import datetime
 
 def handler(event, context):
     data = {
-        'output': 'Profile Created'
+        'output': 'Profile Created!'
     }
     return {'statusCode': 200,
             'body': json.dumps(data),

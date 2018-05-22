@@ -5,7 +5,7 @@ def test_get_matches_handler():
   event = {}
   context = {}
   expected = {
-    'body': '{"output": "Your Matches"}',
+    'body': '{"output": "Your Matches:"}',
     'headers': {
       'Content-Type': 'application/json'
     },

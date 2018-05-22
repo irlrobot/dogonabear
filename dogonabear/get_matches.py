@@ -4,7 +4,7 @@ import datetime
 
 def handler(event, context):
     data = {
-        'output': 'Your Matches'
+        'output': 'Your Matches:'
     }
     return {'statusCode': 200,
             'body': json.dumps(data),
